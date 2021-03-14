@@ -1,6 +1,7 @@
 import './App.css';
 const getResult = require('@alheimsins/b5-result-text');
 const calculateScore = require('@alheimsins/bigfive-calculate-score');
+const { getItems, getInfo, getChoices, getQuestions } = require('@alheimsins/b5-johnson-120-ipip-neo-pi-r');
 
 function App() {
 
@@ -36,9 +37,14 @@ function App() {
 
   //based on https://github.com/rubynor/bigfive-web/blob/master/api/result.js
 const scores = calculateScore(data);
-const results = getResult({scores, lang: 'en'})
+const results = getResult({scores, lang: 'en'});
 
-console.log(JSON.stringify(results, null, 2))
+console.log(JSON.stringify(results, null, 2));
+console.log('getInfo()', getInfo());
+console.log('getChoices()', getChoices());
+console.log('getQuestions()', getQuestions());
+console.log('getItems()', getItems());
+
 
   return (
     <div className="App">
