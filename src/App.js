@@ -39,17 +39,20 @@ function App() {
 const scores = calculateScore(data);
 const results = getResult({scores, lang: 'en'});
 
-console.log(JSON.stringify(results, null, 2));
-console.log('getInfo()', getInfo());
-console.log('getChoices()', getChoices());
-console.log('getQuestions()', getQuestions());
-console.log('getItems()', getItems());
+// console.log(JSON.stringify(results, null, 2));
+// console.log('getInfo()', getInfo());
+// console.log('getChoices()', getChoices());
+// console.log('getQuestions()', getQuestions());
+// console.log('getItems()', getItems());
+let items = getItems();
+console.log(items);
 
 
   return (
     <div className="App">
       <header className="App-header">
-        {JSON.stringify(results, null, 2)}
+        {/* {JSON.stringify(results, null, 2)} */}
+        {items.map(i => <div>{i.text}</div>)}
       </header>
     </div>
   );
