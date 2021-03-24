@@ -1,12 +1,13 @@
 import './App.css';
-import Questions from './components/Questions';
+import Questionnaire from './components/Questionnaire';
 import Results from './components/Results';
 
 function App() {
   return (
     <div className="App">
+      {/* TODO: add router */}
       <Results />
-      <Questions />
+      <Questionnaire />
     </div>
   );
 }
