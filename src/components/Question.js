@@ -14,10 +14,11 @@ export default class Question extends Component {
     let { id, domain, facet } = this.props.item;
     let { score } = this.state;
     let j = { id, domain, facet, score };
-    let k = JSON.stringify({ domain, facet, score });
+    // TODO: check if id already exists in the answers array; 
+    // if yes, check if score has changed; if yes, then replace item.
     this.props.pushAnswer(j);
-    localStorage.setItem(id, k); // TODO: check if id already exists; if yes, check if score has changed; if yes, then replace item.
-  } //https://stackoverflow.com/a/3146971
+    this.props.storeAnswer(j);
+  } 
 
   render() {
     let { text, choices, id } = this.props.item;

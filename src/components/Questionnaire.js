@@ -20,6 +20,12 @@ export default class Questionnaire extends Component {
     let stack = this.state.answers.concat(answer);
     this.setState({ answers: stack });
   } //https://stackoverflow.com/a/37435577
+
+  storeAnswer = ({ id, domain, facet, score }) => {
+    let k = JSON.stringify({ domain, facet, score });
+    localStorage.setItem(id, k);
+    //https://stackoverflow.com/a/3146971
+  }
   
   getAnswers = () => {
     return this.state.answers;
@@ -34,7 +40,7 @@ export default class Questionnaire extends Component {
   }
   
   render() {
-    const { pushAnswer, getAnswers, setCurrentPage, getCurrentPage } = this;
+    const { pushAnswer, storeAnswer, getAnswers, setCurrentPage, getCurrentPage } = this;
     const indexOfLastQuestion = this.state.currentPage * this.state.questionsPerPage;
     const indexOfFirstQuestion = indexOfLastQuestion - this.state.questionsPerPage;
     const currentQuestions = this.state.items.slice(indexOfFirstQuestion, indexOfLastQuestion);
@@ -44,6 +50,7 @@ export default class Questionnaire extends Component {
         <Questions
           currentQuestions={currentQuestions}
           pushAnswer={pushAnswer}
+          storeAnswer={storeAnswer}
           getAnswers={getAnswers}
         />
         <Pagination
