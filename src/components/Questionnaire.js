@@ -15,9 +15,22 @@ export default class Questionnaire extends Component {
   componentDidMount() {
     this.setState({ items: getItems() });
   }
+
+  // remove answer with duplicate id, so that the test-taker 
+  // can change an answer without creating a duplicate instance.
+  // we need this for pushAnswer but not for storeAnswer, because
+  // localStorage already does this internally.
+  uniqByKeepLast = (data, key) => {
+    return [
+      ...new Map(
+        data.map(x => [key(x), x])
+      ).values()
+    ]
+  }
   
   pushAnswer = answer => {
     let stack = this.state.answers.concat(answer);
+    stack = this.uniqByKeepLast(stack, a => a.id);
     this.setState({ answers: stack });
   } //https://stackoverflow.com/a/37435577
 

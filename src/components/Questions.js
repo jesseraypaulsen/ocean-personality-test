@@ -9,6 +9,7 @@ export default function Questions(props) {
             <Question 
               item={item} 
               pushAnswer={props.pushAnswer}
+              storeAnswer={props.storeAnswer}
               getAnswers={props.getAnswers}
             />
           </div>
