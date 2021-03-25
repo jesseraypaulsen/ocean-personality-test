@@ -28,9 +28,13 @@ export default class Questions extends Component {
   setCurrentPage = pageNumber => {
     this.setState({ currentPage: pageNumber });
   }
+
+  getCurrentPage = ()=> {
+    return this.state.currentPage;
+  }
   
   render() {
-    const { pushAnswer, getAnswers } = this;
+    const { pushAnswer, getAnswers, setCurrentPage, getCurrentPage } = this;
     const indexOfLastQuestion = this.state.currentPage * this.state.questionsPerPage;
     const indexOfFirstQuestion = indexOfLastQuestion - this.state.questionsPerPage;
     const currentQuestions = this.state.items.slice(indexOfFirstQuestion, indexOfLastQuestion);
@@ -48,7 +52,8 @@ export default class Questions extends Component {
         <Pagination
           questionsPerPage={this.state.questionsPerPage}
           totalQuestions={this.state.items.length}
-          setCurrentPage={this.setCurrentPage}
+          setCurrentPage={setCurrentPage}
+          getCurrentPage={getCurrentPage}
         />
       </div>
     );
