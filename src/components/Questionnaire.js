@@ -1,9 +1,9 @@
 import { Component } from 'react';
-import Question from './Question';
+import Questions from './Questions';
 import Pagination from './Pagination';
 const { getItems } = require('@alheimsins/b5-johnson-120-ipip-neo-pi-r');
 
-export default class Questions extends Component {
+export default class Questionnaire extends Component {
   state = {
     items: [],
     answers: [],
@@ -41,14 +41,11 @@ export default class Questions extends Component {
     console.log(`currentQuestions: ${JSON.stringify(currentQuestions)}`);
     return (
       <div className="container mt-5">
-        {currentQuestions.map((item, index) => {
-          return <Question 
-            item={item} 
-            index={index} 
-            pushAnswer={pushAnswer}
-            getAnswers={getAnswers}
-          />;
-        })}
+        <Questions
+          currentQuestions={currentQuestions}
+          pushAnswer={pushAnswer}
+          getAnswers={getAnswers}
+        />
         <Pagination
           questionsPerPage={this.state.questionsPerPage}
           totalQuestions={this.state.items.length}
