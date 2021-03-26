@@ -13,7 +13,7 @@ const Pagination = ({ questionsPerPage, totalQuestions, setCurrentPage, getCurre
         <li className='page-item'><a href='#!' className='page-link' onClick={() => setCurrentPage(getCurrentPage() + 1)}>Next</a></li>
         <li className='page-item'><a href='#!' className='page-link' onClick={() => setCurrentPage(getCurrentPage() - 1)}>Previous</a></li>
         {pageNumbers.map(number => (
-          <li key={number} className='page-item'>
+          <li key={number} className={(getCurrentPage() === number) ? 'page-item active' : 'page-item'}>
             <a onClick={() => setCurrentPage(number)} href='#!' className='page-link'>
               {number}
             </a>

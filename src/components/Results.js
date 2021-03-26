@@ -1,5 +1,13 @@
-const getResult = require('@alheimsins/b5-result-text');
+import { useState } from 'react';
+
 const calculateScore = require('@alheimsins/bigfive-calculate-score');
+const getResult = require('@alheimsins/b5-result-text');
+
+/*https://github.com/Alheimsins/bigfive-calculate-score/blob/main/README.md
+  Pass an object with property 'answers'. 
+  Answers have to be an Array with domain and score. 
+  Facet is optional.
+*/
 
 export default function Results() {
 
@@ -7,8 +15,8 @@ export default function Results() {
     "timeElapsed": -51,
     "ip": "127.0.0.1",
     "lang": "en",
-    "test": "50-IPIP-NEO-PI-R",
-    "totalQuestions": 50,
+    "test": "120-IPIP-NEO-PI-R",
+    "totalQuestions": 120,
     "answers": [
       {
         "domain": "A",
@@ -40,6 +48,10 @@ export default function Results() {
 
   console.log('these are your results:' + JSON.stringify(results, null, 2));
 
-  return (<span>Results coming soon...</span>);
+  return (
+    <div>
+      Your Results So Far
+    </div>
+  );
 
 };
