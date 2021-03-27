@@ -1,4 +1,4 @@
-//https://github.com/rubynor/bigfive-web#related
+//https://github.com/zrrrzzt/b5-web#related
 //https://ipip.ori.org/
 //https://github.com/zrrrzzt/b5-web/blob/main/pages/result.js
 //https://b5.allthethings.win/result
@@ -7,6 +7,7 @@ import { Component } from 'react';
 import Questions from './components/Questions';
 import Pagination from './components/Pagination';
 import Results from './components/Results';
+import Header from './components/Header';
 import './App.css';
 const { getItems } = require('@alheimsins/b5-johnson-120-ipip-neo-pi-r');
 
@@ -15,7 +16,8 @@ export default class App extends Component {
     items: [],
     answers: [],
     currentPage: 1,
-    questionsPerPage: 5
+    questionsPerPage: 3,
+    toggler: false
   };
 
   
@@ -59,6 +61,10 @@ export default class App extends Component {
     return this.state.currentPage;
   }
   
+  toggleResults = ()=> {
+    this.setState({ toggler: !this.state.toggler });
+  }
+
   render() {
     const { pushAnswer, storeAnswer, getAnswers, setCurrentPage, getCurrentPage } = this;
     const indexOfLastQuestion = this.state.currentPage * this.state.questionsPerPage;
@@ -66,7 +72,8 @@ export default class App extends Component {
     const currentQuestions = this.state.items.slice(indexOfFirstQuestion, indexOfLastQuestion);
     console.log(`currentQuestions: ${JSON.stringify(currentQuestions)}`);
     return (
-      <div className="App container mt-5">
+      <div className="App container">
+        <Header toggleResults={this.toggleResults} toggler={this.state.toggler} />
         <Questions
           currentQuestions={currentQuestions}
           pushAnswer={pushAnswer}

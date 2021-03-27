@@ -11,7 +11,7 @@ const Pagination = ({ questionsPerPage, totalQuestions, setCurrentPage, getCurre
     <nav style={{marginTop: '50px'}}>
       <ul className='pagination'>
         <li className='page-item'><a href='#!' className='page-link' onClick={() => setCurrentPage(getCurrentPage() + 1)}>Next</a></li>
-        <li className='page-item'><a href='#!' className='page-link' onClick={() => setCurrentPage(getCurrentPage() - 1)}>Previous</a></li>
+        <li className={getCurrentPage() > 1 ? 'page-item' : 'page-item disabled'}><a href='#!' className='page-link' onClick={() => setCurrentPage(getCurrentPage() - 1)}>Previous</a></li>
         {pageNumbers.map(number => (
           <li key={number} className={(getCurrentPage() === number) ? 'page-item active' : 'page-item'}>
             <a onClick={() => setCurrentPage(number)} href='#!' className='page-link'>
