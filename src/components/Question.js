@@ -14,8 +14,8 @@ export default class Question extends Component {
   }
 
   // we need to pass the id from props.item into props.setScore,
-  // so the latter can iterate over the array of objects (items) in state and
-  // compare each id to the one selected here, and when it finds the right object,
+  // so the latter can iterate over the array of objects in state and
+  // compare each id to the one here, and when it finds the object,
   // score is set to event.target.value.
 
   //https://getbootstrap.com/docs/5.0/components/card/
@@ -36,8 +36,8 @@ export default class Question extends Component {
                   value={choice.score} 
                   name={id}
                   onClick={(e) => this.handler(id, e)}
+                  checked={score == choice.score}
                   ></input>
-                  {/* TODO: use item.score in a ternary to select a radio if state says the user selected it before */}
                 <label for={i} className="form-check-label">{choice.text}</label>
               </div>
             </div>

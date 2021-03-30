@@ -85,9 +85,7 @@ export default class App extends Component {
     const indexOfLastQuestion = currentPage * questionsPerPage;
     const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
     const currentQuestions = items.slice(indexOfFirstQuestion, indexOfLastQuestion);
-    //console.log(`currentQuestions: ${JSON.stringify(currentQuestions)}`);
-    console.log('!!! here is an item:');
-    console.log(this.state.items[0]);
+
     return (
       <div className="App container">
         <Header toggleResults={toggleResults} toggler={toggler} />
