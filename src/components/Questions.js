@@ -11,6 +11,7 @@ export default function Questions(props) {
               pushAnswer={props.pushAnswer}
               storeAnswer={props.storeAnswer}
               getAnswers={props.getAnswers}
+              setScore={props.setScore}
             />
           </div>
         )

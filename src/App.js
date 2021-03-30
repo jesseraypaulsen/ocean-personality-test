@@ -20,9 +20,13 @@ export default class App extends Component {
     toggler: false
   };
 
-  
   componentDidMount() {
-    this.setState({ items: getItems() });
+    let items = getItems();
+    items = items.map(it=> {
+      it.score = null;
+      return it;
+    });
+    this.setState({ items });
   }
 
   // remove answer with duplicate id, so that the test-taker 
@@ -52,6 +56,16 @@ export default class App extends Component {
   getAnswers = () => {
     return this.state.answers;
   }
+
+  setScore = (id, eventVal, thenDoThis) => {
+    let items = this.state.items.map(item => {
+      if (item.id === id) {
+        item.score = eventVal;
+      }
+      return item;
+    });
+    this.setState({ items }, thenDoThis);
+  }
   
   setCurrentPage = pageNumber => {
     this.setState({ currentPage: pageNumber });
@@ -66,26 +80,34 @@ export default class App extends Component {
   }
 
   render() {
-    const { pushAnswer, storeAnswer, getAnswers, setCurrentPage, getCurrentPage } = this;
-    const indexOfLastQuestion = this.state.currentPage * this.state.questionsPerPage;
-    const indexOfFirstQuestion = indexOfLastQuestion - this.state.questionsPerPage;
-    const currentQuestions = this.state.items.slice(indexOfFirstQuestion, indexOfLastQuestion);
-    console.log(`currentQuestions: ${JSON.stringify(currentQuestions)}`);
+    const { pushAnswer, storeAnswer, getAnswers, setCurrentPage, getCurrentPage, toggleResults, setScore } = this;
+    const { currentPage, questionsPerPage, items, answers, toggler } = this.state;
+    const indexOfLastQuestion = currentPage * questionsPerPage;
+    const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
+    const currentQuestions = items.slice(indexOfFirstQuestion, indexOfLastQuestion);
+    //console.log(`currentQuestions: ${JSON.stringify(currentQuestions)}`);
+    console.log('!!! here is an item:');
+    console.log(this.state.items[0]);
     return (
       <div className="App container">
-        <Header toggleResults={this.toggleResults} toggler={this.state.toggler} />
-        <Questions
-          currentQuestions={currentQuestions}
-          pushAnswer={pushAnswer}
-          storeAnswer={storeAnswer}
-          getAnswers={getAnswers}
-        />
-        <Pagination
-          questionsPerPage={this.state.questionsPerPage}
-          totalQuestions={this.state.items.length}
-          setCurrentPage={setCurrentPage}
-          getCurrentPage={getCurrentPage}
-        />
+        <Header toggleResults={toggleResults} toggler={toggler} />
+        {toggler ? <Results answers={answers} /> : 
+          <>
+            <Questions
+              currentQuestions={currentQuestions}
+              pushAnswer={pushAnswer}
+              storeAnswer={storeAnswer}
+              getAnswers={getAnswers}
+              setScore={setScore}
+            />
+            <Pagination
+              questionsPerPage={questionsPerPage}
+              totalQuestions={items.length}
+              setCurrentPage={setCurrentPage}
+              getCurrentPage={getCurrentPage}
+            />
+          </>
+        }
       </div>
     );
   }

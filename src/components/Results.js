@@ -743,32 +743,49 @@ export default function Results() {
 
   //based on https://github.com/rubynor/bigfive-web/blob/master/api/result.js
   const scores = calculateScore(data);
-  console.log('these are the scores:', scores);
+  //console.log('these are the scores:', scores);
   const results = getResult({scores, lang: 'en'});
 
-  console.log('these are your results:' + JSON.stringify(results, null, 2));
+  //const newResults = results.map(res => );
+  console.log(`look at your result: ${results[0]}`);
+  console.log(`this is the number of results: ${results.length}`);
+  //console.log('these are your results:' + JSON.stringify(results, null, 2));
 
-  //https://getbootstrap.com/docs/5.0/components/navs-tabs/#using-data-attributes
   return (
-      <>
-        <nav>
-          <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="nav-open-tab" data-bs-toggle="tab" data-bs-target="#nav-open" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Openness</button>
-            <button class="nav-link" id="nav-consci-tab" data-bs-toggle="tab" data-bs-target="#nav-consci" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Conscientiousness</button>
-            <button class="nav-link" id="nav-extra-tab" data-bs-toggle="tab" data-bs-target="#nav-extra" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Extraversion</button>
-            <button class="nav-link" id="nav-agree-tab" data-bs-toggle="tab" data-bs-target="#nav-agree" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Agreeableness</button>
-            <button class="nav-link" id="nav-neuro-tab" data-bs-toggle="tab" data-bs-target="#nav-neuro" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Neuroticism</button>
-          </div>
-        </nav>
-
-        <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade show active" id="nav-open" role="tabpanel" aria-labelledby="nav-open-tab">...</div>
-          <div class="tab-pane fade" id="nav-consci" role="tabpanel" aria-labelledby="nav-consci-tab">...</div>
-          <div class="tab-pane fade" id="nav-extra" role="tabpanel" aria-labelledby="nav-extra-tab">...</div>
-          <div class="tab-pane fade" id="nav-agree" role="tabpanel" aria-labelledby="nav-agree-tab">...</div>
-          <div class="tab-pane fade" id="nav-neuro" role="tabpanel" aria-labelledby="nav-neuro-tab">...</div>
+    <>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          {results.map((res, i) => <button key={i} class="nav-link" id={"nav-"+res.domain+"-tab"} data-bs-toggle="tab" data-bs-target={"#nav-"+ res.domain} type="button" role="tab" aria-controls={"nav-"+res.domain}>{res.title}</button>)}
         </div>
-      </>
+      </nav>
+
+      <div class="tab-content" id="nav-tabContent">
+        {results.map((res, i) => <div key={i} class="tab-pane fade" id={"nav-"+res.domain} role="tabpanel" aria-labelledby={"nav-"+res.domain+"-tab"}><p>Score: {res.score}</p><p>{res.text}</p><p>{res.description}</p></div>)}
+      </div>
+    </>
   );
+  
+  //https://getbootstrap.com/docs/5.0/components/navs-tabs/#using-data-attributes
+  // return (
+  //     <>
+  //       <nav>
+  //         <div class="nav nav-tabs" id="nav-tab" role="tablist">
+  //           <button class="nav-link active" id="nav-open-tab" data-bs-toggle="tab" data-bs-target="#nav-open" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Openness</button>
+  //           <button class="nav-link" id="nav-consci-tab" data-bs-toggle="tab" data-bs-target="#nav-consci" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Conscientiousness</button>
+  //           <button class="nav-link" id="nav-extra-tab" data-bs-toggle="tab" data-bs-target="#nav-extra" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Extraversion</button>
+  //           <button class="nav-link" id="nav-agree-tab" data-bs-toggle="tab" data-bs-target="#nav-agree" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Agreeableness</button>
+  //           <button class="nav-link" id="nav-neuro-tab" data-bs-toggle="tab" data-bs-target="#nav-neuro" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Neuroticism</button>
+  //         </div>
+  //       </nav>
+
+  //       <div class="tab-content" id="nav-tabContent" style={{ color: "white" }}>
+  //         <div class="tab-pane fade show active" id="nav-open" role="tabpanel" aria-labelledby="nav-open-tab">openness</div>
+  //         <div class="tab-pane fade" id="nav-consci" role="tabpanel" aria-labelledby="nav-consci-tab">conscientiousness</div>
+  //         <div class="tab-pane fade" id="nav-extra" role="tabpanel" aria-labelledby="nav-extra-tab">extraversion</div>
+  //         <div class="tab-pane fade" id="nav-agree" role="tabpanel" aria-labelledby="nav-agree-tab">agreeableness</div>
+  //         <div class="tab-pane fade" id="nav-neuro" role="tabpanel" aria-labelledby="nav-neuro-tab">neuroticism</div>
+  //       </div>
+  //     </>
+  // );
 
 };
