@@ -755,7 +755,7 @@ export default function Results() {
     <>
       <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          {results.map((res, i) => <button key={i} class="nav-link" id={"nav-"+res.domain+"-tab"} data-bs-toggle="tab" data-bs-target={"#nav-"+ res.domain} type="button" role="tab" aria-controls={"nav-"+res.domain}>{res.title}</button>)}
+          {results.map((res, i) => <button key={i} class={i==0 ? "nav-link active" : "nav-link"} id={"nav-"+res.domain+"-tab"} data-bs-toggle="tab" data-bs-target={"#nav-"+ res.domain} type="button" role="tab" aria-controls={"nav-"+res.domain}>{res.title}</button>)}
         </div>
       </nav>
 

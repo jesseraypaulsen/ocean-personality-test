@@ -23,7 +23,7 @@ export default class Question extends Component {
   render() {
     let { text, choices, id, score } = this.props.item;
     return (
-      <div className="card">
+      <div className="card bg-primary">
         <div className="card-header">{text}</div>
         <div className="list-group list-group-flush">
           {choices.map((choice, i) => 
