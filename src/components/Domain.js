@@ -11,35 +11,26 @@ export default function Domain(props) {
       role="tabpanel" 
       aria-labelledby={"nav-"+result.domain+"-tab"}
     >
-      <p>
-        title: {result.title}
+      <p style={{ marginTop: "20px" }}>
+        <h2>{result.title}</h2>
       </p>
       <p>
-        score: {result.score}
+        {result.shortDescription}
       </p>
       <p>
-        count: {result.count}
+        You scored {result.score} based on {result.count} answer{result.count > 1 ? 's' : ''} to questions in this domain.
       </p>
       <p>
-        scoreText: {result.scoreText}
+        {result.text}
       </p>
-      <p>
-        text: {result.text}
-      </p>
-      <p>
-        shortDescription: {result.shortDescription}
-      </p>
-      <p>
-        description: {result.description}
-      </p>
-      <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" }}>
+
+      <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", alignContent: "space-evenly", maxWidth: "1000px" }}>
        {result.facets ? result.facets.map((f, key) => 
-          <div key={key} style={{ padding: "15px", border: "1px solid black" }}>
-            <div>title: {f.title}</div>
-            <div>text: {f.text}</div>
+          <div key={key} style={{ padding: "15px", border: "1px solid black", minWidth: "280px" }}>
+            <h4>{f.title}</h4>
             <div>score: {f.score}</div>
-            <div>count: {f.count}</div>
-            <div>scoreText: {f.scoreText}</div>
+            <div>{f.count} question{f.count > 1 ? 's' : ''}</div>
+            <div>{f.scoreText}</div>
           </div>
         ) : null} 
       </div>

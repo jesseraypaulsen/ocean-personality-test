@@ -46,6 +46,7 @@ export default function Results(props) {
       <div 
         class="tab-content" 
         id="nav-tabContent"
+        style={{ width: "1000px" }}
       >
         {results.map((res, i) => 
           <Domain 
