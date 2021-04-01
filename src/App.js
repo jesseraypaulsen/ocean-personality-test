@@ -87,7 +87,7 @@ export default class App extends Component {
     const currentQuestions = items.slice(indexOfFirstQuestion, indexOfLastQuestion);
 
     return (
-      <div className="App container">
+      <div className="App">
         <Header toggleResults={toggleResults} toggler={toggler} />
         {toggler ? <Results answers={answers} /> : 
           <>

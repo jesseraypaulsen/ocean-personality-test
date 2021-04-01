@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Domain from './Domain';
 
 const calculateScore = require('@alheimsins/bigfive-calculate-score');
 const getResult = require('@alheimsins/b5-result-text');
@@ -28,7 +29,7 @@ export default function Results(props) {
           {results.map((res, i) => 
             <button 
               key={i} 
-              className={i==0 ? "nav-link active" : "nav-link"} 
+              className={res.domain === 'N' ? "nav-link active" : "nav-link"} 
               id={"nav-"+res.domain+"-tab"} 
               data-bs-toggle="tab" 
               data-bs-target={"#nav-"+ res.domain} 
@@ -47,51 +48,10 @@ export default function Results(props) {
         id="nav-tabContent"
       >
         {results.map((res, i) => 
-          <div 
+          <Domain 
             key={i} 
-            className={i==0 ? "tab-pane fade show active" : "tab-pane fade"} 
-            id={"nav-"+res.domain} 
-            role="tabpanel" 
-            aria-labelledby={"nav-"+res.domain+"-tab"}
-          >
-            <p>
-              domain: {res.domain}
-            </p>
-            <p>
-              title: {res.title}
-            </p>
-            <p>
-              shortDescription: {res.shortDescription}
-            </p>
-            <p>
-              score: {res.score}
-            </p>
-            <p>
-              scoreText: {res.scoreText}
-            </p>
-            <p>
-              count: {res.count}
-            </p>
-            <p>
-              text: {res.text}
-            </p>
-            <p>
-              description: {res.description}
-            </p>
-            <p>
-              <h3>Facets</h3>
-              {res.facets.map(i => (
-                <div>
-                  <div>facet: {i.facet}</div>
-                  <div>title: {i.title}</div>
-                  <div>text: {i.text}</div>
-                  <div>score: {i.score}</div>
-                  <div>count: {i.count}</div>
-                  <div>scoreText: {i.scoreText}</div>
-                </div>
-              ))}
-            </p>
-          </div>
+            result={res}
+          />
         )}
 
       </div>
